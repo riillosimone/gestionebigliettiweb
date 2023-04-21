@@ -15,7 +15,6 @@ import it.prova.gestionebigliettiweb.service.MyServiceFactory;
 @WebServlet("/ListBigliettiServlet")
 public class ListBigliettiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
