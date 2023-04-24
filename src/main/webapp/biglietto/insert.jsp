@@ -5,6 +5,40 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html lang="it" class="h-100">
 <head>
+<script type="text/javascript">
+	function validateForm() {
+		var provenienza = document.getElementById("provenienza");
+		var destinazione = document.getElementById("destinazione");
+		var prezzo = document.getElementById("prezzo");
+		var data = document.getElementById("data");
+		var formIsValid = true;
+		if (provenienza.value === "") {
+			provenienza.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			provenienza.classList.remove("is-invalid");
+		}
+		if (destinazione.value === "") {
+			destinazione.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			destinazione.classList.remove("is-invalid");
+		}
+		if (prezzo.value === "") {
+			prezzo.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			prezzo.classList.remove("is-invalid");
+		}
+		if (data.value === "") {
+			data.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			data.classList.remove("is-invalid");
+		}
+		return formIsValid;
+	}
+</script>
 
 <!-- Common imports in pages -->
 <jsp:include page="../header.jsp" />
@@ -53,7 +87,8 @@
 
 
 					<form method="post" action="ExecuteInsertBigliettoServlet"
-						class="row g-3" novalidate="novalidate">
+						class="row g-3" novalidate="novalidate" name="insert"
+						onsubmit="return validateForm()">
 
 						<c:set var="bigliettoInPagina" value="${insert_biglietto_attr}"></c:set>
 

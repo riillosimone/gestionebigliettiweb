@@ -8,6 +8,40 @@
 
 <!-- Common imports in pages -->
 <jsp:include page="../header.jsp" />
+<script type="text/javascript">
+	function validateForm() {
+		var provenienza = document.getElementById("provenienza");
+		var destinazione = document.getElementById("destinazione");
+		var prezzo = document.getElementById("prezzo");
+		var data = document.getElementById("data");
+		var formIsValid = true;
+		if (provenienza.value === "") {
+			provenienza.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			provenienza.classList.remove("is-invalid");
+		}
+		if (destinazione.value === "") {
+			destinazione.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			destinazione.classList.remove("is-invalid");
+		}
+		if (prezzo.value === "") {
+			prezzo.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			prezzo.classList.remove("is-invalid");
+		}
+		if (data.value === "") {
+			data.classList.add("is-invalid");
+			formIsValid = false;
+		} else {
+			data.classList.remove("is-invalid");
+		}
+		return formIsValid;
+	}
+</script>
 
 <title>Modifica Elemento</title>
 </head>
@@ -53,7 +87,8 @@
 
 
 					<form method="post" action="ExecuteEditBigliettoServlet"
-						class="row g-3" novalidate="novalidate">
+						class="row g-3" novalidate="novalidate"
+						onsubmit="return validateForm()">
 						<c:set var="bigliettoInPagina"
 							value="${bigliettoDaInviareAPaginaEdit}"></c:set>
 
@@ -110,18 +145,17 @@
 
 						<div class="col-md-3">
 							<label for="data" class="form-label">Data<span
-								class="text-danger">*</span></label><c:if test="${bigliettoInPagina.getData()!= null}">
-								<fmt:parseDate value="${bigliettoInPagina.getData()}"
-									pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+								class="text-danger">*</span></label>
+							<c:set var="data" value="${bigliettoInPagina.getData()}"></c:set>
+							
+							<c:if test="${data!=null}">
 
-								<fmt:formatDate value="${parsedDate}" var="newParsedDate"
-									type="date" pattern="dd/MM/yyyy" />
 								<input class="form-control" name="data" id="data" type="date"
 									placeholder="dd/MM/yy" title="formato : gg/mm/aaaa"
-									value="${parsedDate}" required />
+									value="${data}" required />
 
 							</c:if>
-							<c:if test="${bigliettoInPagina.getData()== null}">
+							<c:if test="${data == null}">
 								<input class="form-control" name="data" id="data" type="date"
 									placeholder="dd/MM/yy" title="formato : gg/mm/aaaa" value=""
 									required />
